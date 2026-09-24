@@ -25,6 +25,7 @@ namespace WpfApp1
         public PersonInfo Player = new PersonInfo("Student", 100, 10, 1, 0, 0, 5);
         public List<Classes.PersonInfo> Enemys = new List<Classes.PersonInfo>();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        public Classes.PersonInfo Enemy;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,7 +37,24 @@ namespace WpfApp1
             dispatcherTimer.Tick += AttackPlayer;
             dispatcherTimer.Interval = new System.TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
+
+            SelectEnemy();
         }
+
+        public void SelectEnemy()
+        {
+            int Id = new Random().Next(0, Enemys.Count);
+            Enemy = new Classes.PersonInfo(
+                Enemys[Id].Name,
+                Enemys[Id].Health,
+                Enemys[Id].Armor,
+                Enemys[Id].Level,
+                Enemys[Id].Glasses,
+                Enemys[Id].Money,
+                Enemys[Id].Damage);
+
+        }
+
         public void UserInfoPlayer()
         {
             if (Player.Glasses > 100 * Player.Level)
@@ -56,11 +74,24 @@ namespace WpfApp1
 
         private void AttackEnemy(object sender, MouseButtonEventArgs e)
         {
-
+            Enemy.Health -= Convert.ToInt32(Player.Damage * 100f / (100f - Enemy.Armor));
+            if(Enemy.Health <= 0)
+            {
+                Player.Glasses += Enemy.Glasses;
+                Player.Money += Enemy.Money;
+                UserInfoPlayer();
+                SelectEnemy();
+            }
+            else
+            {
+                emptyHealth.Content = "Жизненные показатели: " + Enemy.Health;
+                emptyArmor.Content = "Броня: " + Enemy.Armor;
+            }
         }
         private void AttackPlayer(object sender, System.EventArgs e)
         {
-
+            Player.Health -= Convert.ToInt32(Enemy.Damage * 100f / (100f - Player.Armor));
+            UserInfoPlayer();
         }
     }
 }
