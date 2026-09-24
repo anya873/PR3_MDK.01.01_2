@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Glasses
 {
-    internal class PersonalInfo
+    public class PersonalInfo
     {
         public string Name { get; set; }
         public int Health { get; set; }
