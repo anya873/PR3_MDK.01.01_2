@@ -75,7 +75,18 @@ namespace WpfApp1
         private void AttackEnemy(object sender, MouseButtonEventArgs e)
         {
             Enemy.Health -= Convert.ToInt32(Player.Damage * 100f / (100f - Enemy.Armor));
-            if(Enemy.Health <= 0)
+
+            Random rnd = new Random();
+            if (rnd.Next(100) < 20)
+            {
+                int hlth = Convert.ToInt32(Player.Damage * 0.3);
+                Player.Health += hlth;
+                UserInfoPlayer();
+                MessageBox.Show("Похищено здоровья: " + hlth);
+            }
+
+
+            if (Enemy.Health <= 0)
             {
                 Player.Glasses += Enemy.Glasses;
                 Player.Money += Enemy.Money;
@@ -87,10 +98,19 @@ namespace WpfApp1
                 emptyHealth.Content = "Жизненные показатели: " + Enemy.Health;
                 emptyArmor.Content = "Броня: " + Enemy.Armor;
             }
+
+
         }
         private void AttackPlayer(object sender, System.EventArgs e)
         {
             Player.Health -= Convert.ToInt32(Enemy.Damage * 100f / (100f - Player.Armor));
+            Random rnd = new Random();
+            if (rnd.Next(0, 100) < 10)
+            {
+                int hlth = Convert.ToInt32(Enemy.Damage * 0.2);
+                Enemy.Health += hlth;
+                MessageBox.Show("Враг похитил " + hlth + " здоровья");
+            }
             UserInfoPlayer();
         }
     }
