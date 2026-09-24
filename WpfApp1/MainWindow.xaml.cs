@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.Glasses;
+using WpfApp1.Classes;
+using System.Windows.Threading;
 
 namespace WpfApp1
 {
@@ -21,11 +22,20 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public PersonalInfo Player = new PersonalInfo("Student", 100, 10, 1, 0, 0, 5);
+        public PersonInfo Player = new PersonInfo("Student", 100, 10, 1, 0, 0, 5);
+        public List<Classes.PersonInfo> Enemys = new List<Classes.PersonInfo>();
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
             UserInfoPlayer();
+            Enemys.Add(new Classes.PersonInfo("Враг 1", 100, 20, 1, 15, 5, 20));
+            Enemys.Add(new Classes.PersonInfo("Враг 2", 20, 5, 1, 5, 2, 5));
+            Enemys.Add(new Classes.PersonInfo("Враг 3", 50, 3, 1, 10, 10, 15));
+
+            dispatcherTimer.Tick += AttackPlayer;
+            dispatcherTimer.Interval = new System.TimeSpan(0, 0, 10);
+            dispatcherTimer.Start();
         }
         public void UserInfoPlayer()
         {
@@ -42,6 +52,15 @@ namespace WpfApp1
             playerLevel.Content = "Уровень:" + Player.Level;
             playerGlasses.Content = "Опыт:" + Player.Glasses;
             playerMoney.Content = "Монеты:" + Player.Money;
+        }
+
+        private void AttackEnemy(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void AttackPlayer(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

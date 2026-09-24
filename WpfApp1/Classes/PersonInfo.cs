@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Glasses
+namespace WpfApp1.Classes
 {
-    public class PersonalInfo
+    public class PersonInfo
     {
         public string Name { get; set; }
         public int Health { get; set; }
@@ -16,7 +16,7 @@ namespace WpfApp1.Glasses
         public int Money { get; set; }
         public float Damage { get; set; }
 
-        public PersonalInfo(string name, int health, int armor, int level, int glasses, int money, float damage)
+        public PersonInfo(string name, int health, int armor, int level, int glasses, int money, float damage)
         {
             this.Name = name;
             this.Health = health;

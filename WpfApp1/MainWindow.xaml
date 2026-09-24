@@ -22,7 +22,7 @@
                 <Label x:Name="playerMoney" Content="Монеты: 0" Margin="10,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="10" Background="#FFFDFDFD" Grid.Column="1">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10" Background="#FFFDFDFD" Grid.Column="1" MouseDown="AttackEnemy">
             <Grid>
                 <Image x:Name="emptyImage" Margin="10,10,10.2,185.4" Source="D:\МДК01.01\пр3\WpfApp1\Resources\monster2.png"/>
                 <Label Content="Основные характеристики персонажа:" Margin="10,0,0,160" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontWeight="Bold"/>
